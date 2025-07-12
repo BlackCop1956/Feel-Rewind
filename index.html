@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bollywood Decade Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="default">
+
+  <header>
+    <h1>🎬 Bollywood Decade Explorer</h1>
+    <div class="decade-selector">
+      <button onclick="loadDecade('1970s')">1970s</button>
+      <button onclick="loadDecade('1980s')">1980s</button>
+      <button onclick="loadDecade('1990s')">1990s</button>
+      <button onclick="loadDecade('2000s')">2000s</button>
+      <button onclick="loadDecade('2010s')">2010s</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="music-showcase">
+      <h2>🎵 Top Songs</h2>
+      <ul id="song-list">
+        <li>🎶 Song Name - Singer</li>
+      </ul>
+    </section>
+
+    <section id="artist-carousel">
+      <h2>🎭 Legendary Artists</h2>
+      <div class="carousel">
+        <!-- Artist cards will go here -->
+        <div class="artist-card">
+          <img src="https://via.placeholder.com/100" alt="Artist">
+          <p><strong>Amitabh Bachchan</strong><br>‘Shahenshah’ of Bollywood</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="news-events">
+      <h2>📰 Decade Highlights</h2>
+      <ul>
+        <li>🏏 India wins 1983 Cricket World Cup</li>
+        <li>📺 First color TV broadcast in 1982</li>
+      </ul>
+    </section>
+
+    <section id="fun-facts">
+      <h2>💥 Did You Know?</h2>
+      <div id="loader">
+        <p id="loader-text">Loading fact...</p>
+      </div>
+    </section>
+
+    <section id="ai-section">
+      <h2>🤖 Ask AI About Bollywood</h2>
+      <input type="text" id="question-box" placeholder="Ask something...">
+      <button onclick="askAI()">Ask AI</button>
+      <p id="ai-answer"></p>
+    </section>
+  </main>
+
+  <script>
+    const facts = [
+      "Amitabh Bachchan was injured during ‘Coolie’ (1983).",
+      "India's first color TV broadcast was in 1982!",
+      "Lata Mangeshkar sang over 30,000 songs!"
+    ];
+
+    function loadDecade(decade) {
+      document.body.className = decade;
+      document.getElementById('song-list').innerHTML = `<li>🎶 Sample song for ${decade}</li>`;
+    }
+
+    function showRandomFact() {
+      const fact = facts[Math.floor(Math.random() * facts.length)];
+      document.getElementById('loader-text').textContent = fact;
+    }
+
+    function askAI() {
+      const question = document.getElementById("question-box").value;
+      document.getElementById("ai-answer").textContent = `You asked: "${question}". (AI response will appear here after backend integration)`;
+    }
+
+    setInterval(showRandomFact, 5000);
+    showRandomFact(); // initial fact
+  </script>
+</body>
+</html>
