@@ -1,90 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bollywood Decade Explorer</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body class="default">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bollywood Decade Time Capsule</title>
+  <link rel="stylesheet" href="stylev3.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Mukta&display=swap" rel="stylesheet">
 
-  <header>
-    <h1>🎬 Bollywood Decade Explorer</h1>
-    <div class="decade-selector">
-      <button onclick="loadDecade('1970s')">1970s</button>
-      <button onclick="loadDecade('1980s')">1980s</button>
-      <button onclick="loadDecade('1990s')">1990s</button>
-      <button onclick="loadDecade('2000s')">2000s</button>
-      <button onclick="loadDecade('2010s')">2010s</button>
-    </div>
+  
+</head>
+<body>
+    <div id="welcomePage" style="text-align: center; padding: 80px;">
+  <h1>📽️ Welcome to FeelRewind</h1>
+  <p>Nostalgia, powered by your mood.</p>
+  <button onclick="goToMain()" style="margin-top: 20px; padding: 12px 30px; font-size: 1.2rem; background: #f39c12; border: none; border-radius: 8px; cursor: pointer;">Next</button>
+</div>
+<div id="mainContent" style="display: none;">
+    <header>
+    <h1>🎬 FeelRewind</h1>
+    <p>Relive the Glory of Hindi Cinema</p>
   </header>
 
-  <main>
-    <section id="music-showcase">
-      <h2>🎵 Top Songs</h2>
-      <ul id="song-list">
-        <li>🎶 Song Name - Singer</li>
-      </ul>
-    </section>
+  <div class="decade-selector">
+    <button onclick="loadDecade('1970s')">1970s</button>
+    <button onclick="loadDecade('1980s')">1980s</button>
+    <button onclick="loadDecade('1990s')">1990s</button>
+  </div>
 
-    <section id="artist-carousel">
-      <h2>🎭 Legendary Artists</h2>
-      <div class="carousel">
-        <!-- Artist cards will go here -->
-        <div class="artist-card">
-          <img src="https://via.placeholder.com/100" alt="Artist">
-          <p><strong>Amitabh Bachchan</strong><br>‘Shahenshah’ of Bollywood</p>
-        </div>
-      </div>
-    </section>
+  <section>
+    <h2 id="decade-title">🎵 Music Highlights</h2>
+    <div id="music-section"></div>
 
-    <section id="news-events">
-      <h2>📰 Decade Highlights</h2>
-      <ul>
-        <li>🏏 India wins 1983 Cricket World Cup</li>
-        <li>📺 First color TV broadcast in 1982</li>
-      </ul>
-    </section>
+    <h2>🎭 Influential Artists</h2>
+    <div class="carousel" id="artist-carousel"></div>
 
-    <section id="fun-facts">
-      <h2>💥 Did You Know?</h2>
-      <div id="loader">
-        <p id="loader-text">Loading fact...</p>
-      </div>
-    </section>
+    <h2>📰 Headlines & Events</h2>
+    <ul id="news-section"></ul>
 
-    <section id="ai-section">
-      <h2>🤖 Ask AI About Bollywood</h2>
-      <input type="text" id="question-box" placeholder="Ask something...">
-      <button onclick="askAI()">Ask AI</button>
-      <p id="ai-answer"></p>
-    </section>
-  </main>
+    <h2>💡 Fun Fact</h2>
+    <p id="fun-fact">Loading fact...</p>
+  </section>
 
   <script>
-    const facts = [
-      "Amitabh Bachchan was injured during ‘Coolie’ (1983).",
-      "India's first color TV broadcast was in 1982!",
-      "Lata Mangeshkar sang over 30,000 songs!"
-    ];
+    const data = {
+      '1970s': {
+        songs: [
+          { title: "Mere Sapno Ki Rani", videoId: "9PdSmDRGIwM", composer: "S.D. Burman" },
+          { title: "Yeh Shaam Mastani", videoId: "xP2OcqFcKSY", composer: "R.D. Burman" }
+        ],
+        artists: [
+          { name: "Rajesh Khanna", img: "https://upperstall.com/wp-content/uploads/2015/12/Rajesh-Khanna.jpg", wiki: "https://en.wikipedia.org/wiki/Rajesh_Khanna", bio: "India's first superstar." },
+          { name: "Hema Malini", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqZn9BDMqZTTkZ60UfHsIUYXfO7BiFc_B_RXN4Vxh7ZmdNkx8er5otnIFsw5Rc7k_PPBj-ToSLa23LIQH-CMuZSQ", wiki: "https://en.wikipedia.org/wiki/Hema_Malini", bio: "Dream girl of Bollywood." }
+        ],
+        news: [
+          "1971: Indo-Pak war and creation of Bangladesh",
+          "1975: Emergency declared by Indira Gandhi"
+        ],
+        facts: [
+          "Zanjeer (1973) was Amitabh's breakthrough as the 'Angry Young Man'.",
+          "Sholay (1975) became a cultural phenomenon."
+        ]
+      },
+      '1980s': {
+        songs: [
+          { title: "Om Shanti Om", videoId: "cBqq_3d_tO0", composer: "Bappi Lahiri" },
+          { title: "Jab Hum Jawan Honge", videoId: "iihDX0bN0qY", composer: "R.D. Burman" }
+        ],
+        artists: [
+          { name: "Amitabh Bachchan", img: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTivc04IbyCpehtvRs4Nex_FOBgBQcTgQo9B8rYCoR-vPmaNbMtVYphPMoV2IQ6fGVBgu_okXgZ9N-hRe4ThclYrQ", wiki: "https://en.wikipedia.org/wiki/Amitabh_Bachchan", bio: "Dominated the 80s." },
+          { name: "Rekha", img: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Rekha_2023.jpg", wiki: "https://en.wikipedia.org/wiki/Rekha", bio: "The eternal diva." }
+        ],
+        news: [
+          "1982: Asian Games and introduction of color TV in India",
+          "1983: India wins the Cricket World Cup"
+        ],
+        facts: [
+          "First Indian color broadcast was in 1982.",
+          "Coolie injury almost cost Amitabh his life."
+        ]
+      },
+      '1990s': {
+        songs: [
+          {
+            title: "Pehla Nasha",
+            videoId: "Ki41AKu0iHc",
+            composer: "Jatin-Lalit"
+          },
+          { title: "Tujhe Dekha To", videoId: "cNV5hLSa9H8", composer: "Jatin-Lalit" }
+        ],
+        artists: [
+          { name: "Shah Rukh Khan", img: "https://w0.peakpx.com/wallpaper/394/252/HD-wallpaper-shahrukh-khan-srk-actor-hero.jpg", wiki: "https://en.wikipedia.org/wiki/Shah_Rukh_Khan", bio: "King of Romance." },
+          { name: "Kajol", img: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTvarMpDAYMbeSd_bDRd-p4FdKBWyjRRNjHPcPOsN3Ssb1u4Ru37RI6tc9SPCKAXLQw9Da7JsMd47lCHbCq9Sun7g", wiki: "https://en.wikipedia.org/wiki/Kajol", bio: "Queen of hearts." }
+        ],
+        news: [
+          "1991: Economic liberalization of India",
+          "1999: Kargil War"
+        ],
+        facts: [
+          "DDLJ ran for over 20 years in Maratha Mandir.",
+          "Satellite TV boom began in the 90s."
+        ]
+      }
+    };
+
+    function goToMain() {
+  document.getElementById('welcomePage').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+}
+
 
     function loadDecade(decade) {
-      document.body.className = decade;
-      document.getElementById('song-list').innerHTML = `<li>🎶 Sample song for ${decade}</li>`;
+      const decadeData = data[decade];
+      document.getElementById('decade-title').innerText = `🎵 Music Highlights of the ${decade}`;
+      document.body.className = `theme-${decade.substring(0, 3)}`;
+
+      // Music
+      const musicSection = document.getElementById('music-section');
+      musicSection.innerHTML = decadeData.songs.map(song => `
+  <div style="text-align: center;">
+    <a href="https://www.youtube.com/watch?v=${song.videoId}" target="_blank">
+      <img src="https://img.youtube.com/vi/${song.videoId}/hqdefault.jpg" alt="${song.title}" style="width: 300px; border-radius: 8px; box-shadow: 0 0 10px #000;">
+    </a>
+    <p><strong>${song.title}</strong><br><em>${song.composer}</em></p>
+  </div>
+`).join('');
+
+
+      // Artists
+      const artistCarousel = document.getElementById('artist-carousel');
+      artistCarousel.innerHTML = decadeData.artists.map(artist => `
+  <div class="card">
+    <a href="${artist.wiki}" target="_blank">
+      <img src="${artist.img}" alt="${artist.name}" />
+    </a>
+    <p><strong>${artist.name}</strong><br>${artist.bio}</p>
+  </div>
+`).join('');
+
+
+      // News
+      const newsSection = document.getElementById('news-section');
+      newsSection.innerHTML = decadeData.news.map(item => `<li>${item}</li>`).join('');
+
+      // Random Fun Fact
+      const randomFact = decadeData.facts[Math.floor(Math.random() * decadeData.facts.length)];
+      document.getElementById('fun-fact').innerText = `💡 Did you know? ${randomFact}`;
     }
 
-    function showRandomFact() {
-      const fact = facts[Math.floor(Math.random() * facts.length)];
-      document.getElementById('loader-text').textContent = fact;
-    }
-
-    function askAI() {
-      const question = document.getElementById("question-box").value;
-      document.getElementById("ai-answer").textContent = `You asked: "${question}". (AI response will appear here after backend integration)`;
-    }
-
-    setInterval(showRandomFact, 5000);
-    showRandomFact(); // initial fact
+    // Load 1990s by default
+    loadDecade('1990s');
   </script>
+</div>
+
 </body>
 </html>
