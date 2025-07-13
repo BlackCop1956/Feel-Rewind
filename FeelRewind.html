@@ -2,68 +2,136 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MindTime Radio</title>
+  <title>FeelRewind Radio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: 'Courier New', monospace;
-      background: linear-gradient(to bottom, #1e1e1e, #3e3e3e);
-      color: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #141e30, #243b55);
+      color: #ffffff;
       margin: 0;
       padding: 0;
     }
-    header {
+    header, footer {
       text-align: center;
+      background-color: #1f2833;
       padding: 20px;
-      background-color: #292929;
+      color: #66fcf1;
     }
-    h1 {
-      margin: 0;
-      font-size: 2.2rem;
-    }
-    .radio-box {
-      max-width: 600px;
-      margin: 30px auto;
-      background: #444;
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
       padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.1);
     }
-    select,
-    button {
+    select, button {
       width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      margin-bottom: 15px;
+      padding: 12px;
       font-size: 1rem;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 6px;
+    }
+    select {
+      background-color: #0b0c10;
+      color: #ffffff;
     }
     button {
-      background: #00b894;
-      color: white;
+      background-color: #45a29e;
+      color: #ffffff;
       cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #66fcf1;
+      color: #0b0c10;
     }
     audio {
       width: 100%;
       margin-top: 20px;
     }
-    .footer {
-      text-align: center;
-      margin: 40px 0 10px;
-      font-size: 0.9rem;
-      color: #ccc;
+    img.thumbnail {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .track-title, .fun-fact, .news, .influential-section {
+      margin: 15px 0;
+    }
+    .influential-img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+    #welcomeScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.6s ease;
+    }
+    #welcomeScreen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #enterBtn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      background: #66fcf1;
+      color: #0b0c10;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #enterBtn:hover {
+      background: #45a29e;
+      color: #ffffff;
+    }
+    @keyframes slideInFade {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #welcomeScreen h1, #welcomeScreen p {
+      animation: slideInFade 1.2s ease forwards;
+    }
+    #welcomeScreen h1 {
+      animation-delay: 0.2s;
+    }
+    #welcomeScreen p {
+      animation-delay: 0.6s;
     }
   </style>
 </head>
 <body>
+  <div id="welcomeScreen">
+    <h1>🎙️ Welcome to FeelRewind Radio</h1>
+    <p>Relive your favorite decades through music, moments & memories</p>
+    <button id="enterBtn" onclick="enterApp()">Enter</button>
+  </div>
+
   <header>
     <h1>📻 FeelRewind Radio</h1>
-    <p>AI-Powered Nostalgia by Decade</p>
+    <p>Select a decade to dive into nostalgia!</p>
   </header>
-
-  <div class="radio-box">
-    <label for="decade">🕰️ Choose a Decade</label>
-    <select id="decade">
+  <div class="container">
+    <select id="decade" onchange="changeTheme()">
+      <option value="" disabled selected>Choose a decade</option>
       <option value="1960s">1960s</option>
       <option value="1970s">1970s</option>
       <option value="1980s">1980s</option>
@@ -71,69 +139,81 @@
       <option value="2000s">2000s</option>
       <option value="2010s">2010s</option>
     </select>
-
     <button onclick="generateRadioHour()">Play Radio 🎧</button>
 
+    <img id="thumbnail" class="thumbnail" src="" alt="Song Thumbnail">
+    <div id="trackTitle" class="track-title"></div>
     <audio controls id="radioPlayer"></audio>
     <button onclick="nextSong()">Next Song ⏭️</button>
 
-
+    <div class="fun-fact" id="funFact"></div>
+    <div class="news" id="news"></div>
+    <div class="influential-section">
+      <img id="influentialImg" class="influential-img" src="" alt="Influential Figure">
+      <div id="influentialName" style="font-weight: bold;"></div>
+      <div id="influentialDesc"></div>
+    </div>
   </div>
-
-  <div class="footer">
-    &copy; 2025 MindTime Radio. Rewind your era.
-  </div>
-
+  <footer>
+    &copy; 2025 FeelRewind Radio
+  </footer>
   <script>
-    let playlist = [];
-let currentIndex = 0;
+    let playlist = [], currentIndex = 0;
 
-async function generateRadioHour() {
-  const decade = document.getElementById('decade').value;
+    function enterApp() {
+      const welcome = document.getElementById('welcomeScreen');
+      welcome.classList.add('fade-out');
+      setTimeout(() => welcome.style.display = 'none', 600);
+    }
 
-  try {
-    const res = await fetch("http://localhost:8080/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ decade })
-    });
+    async function generateRadioHour() {
+      const decade = document.getElementById('decade').value;
+      try {
+        const res = await fetch("http://localhost:8080/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ decade })
+        });
 
-    if (!res.ok) throw new Error("Server error");
-    const data = await res.json();
-    console.log("🎧 Playlist received:", data);
+        const data = await res.json();
+        playlist = data.playlist;
+        currentIndex = 0;
+        playTrack(currentIndex);
 
-    playlist = data.playlist;
-    currentIndex = 0;
-    playTrack(currentIndex);
-  } catch (err) {
-    alert("Error playing radio. Try again later.");
-    console.error(err);
-  }
-}
+        document.getElementById('funFact').innerText = "💡 Fun Fact: " + data.funFact;
+        document.getElementById('news').innerText = "📰 News Highlight: " + data.news;
+        document.getElementById('influentialName').innerText = data.influential.name;
+        document.getElementById('influentialDesc').innerText = data.influential.description;
+        document.getElementById('influentialImg').src = data.influential.image;
+      } catch (err) {
+        console.error(err);
+        alert("Failed to load content. Try again later.");
+      }
+    }
 
-function playTrack(index) {
-  if (index >= playlist.length) {
-    console.log("✅ Playlist ended.");
-    return;
-  }
-  const audio = document.getElementById("radioPlayer");
-  audio.src = `audio/${playlist[index]}`;
-  audio.play();
+    function playTrack(index) {
+      if (index >= playlist.length) return;
+      const audio = document.getElementById("radioPlayer");
+      const titleBox = document.getElementById("trackTitle");
+      const thumbnail = document.getElementById("thumbnail");
 
-  // Auto-play next track on end
-  audio.onended = () => {
-    currentIndex++;
-    playTrack(currentIndex);
-  };
-}
-function nextSong() {
-  if (currentIndex + 1 < playlist.length) {
-    playTrack(++currentIndex);
-  }
-}
+      const track = playlist[index];
+      audio.src = `audio/${track.file}`;
+      titleBox.innerText = track.title || "Untitled";
+      thumbnail.src = track.thumbnail || "thumbnails/default.jpg";
+      audio.play();
 
+      audio.onended = () => {
+        currentIndex++;
+        playTrack(currentIndex);
+      };
+    }
 
+    function nextSong() {
+      if (currentIndex + 1 < playlist.length) {
+        playTrack(++currentIndex);
+      }
+    }
   </script>
 </body>
 </html>
-
