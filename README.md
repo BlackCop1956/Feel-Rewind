@@ -105,6 +105,6 @@ FeelRewind/
 
 ## 🏁 Built For
 
-> **Hackathon 2025**  
+> **OSDC Hack 2025**  
 > First-time submission by **Team FeelRewind**  
 > Bringing decades of stories back to life 🎙️
