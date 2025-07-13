@@ -1,8 +1,3 @@
-
-// DecadeDive C++ Backend with Song Thumbnails and Titles
-
-// DecadeDive C++ Backend with Song Thumbnails, Titles, Fun Facts, and News Snippets
-
 #include <iostream>
 #include <string>
 #include <vector>
