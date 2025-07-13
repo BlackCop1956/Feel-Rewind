@@ -6,22 +6,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #141e30, #243b55);
-      color: #ffffff;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, #3e2c41, #1b1a1f);
+      color: #f5f5dc;
       margin: 0;
       padding: 0;
+      min-height: 100vh;
+  display: flex;
+  flex-direction: column;
     }
-    header, footer {
+    header {
       text-align: center;
-      background-color: #1f2833;
+      background-color: #2d1f2b;
       padding: 20px;
-      color: #66fcf1;
+      color: #f9d56e;
+      border-bottom: 3px solid #a76d60;
+    }
+    footer{
+      text-align: center;
+      background-color: #2d1f2b;
+      padding: 8px 20px;
+      color: #f9d56e;
+      border-bottom: none;
+      margin-bottom: 0;
+  padding-bottom: 0;
+  margin: 0;
+  border: none;
     }
     .container {
       max-width: 800px;
       margin: 0 auto;
+      margin-bottom: 0;
       padding: 20px;
+      background: rgba(255,255,255,0.03);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      flex: 1;
+      padding-bottom: 60px;
     }
     select, button {
       width: 100%;
@@ -30,20 +51,21 @@
       margin-bottom: 20px;
       border: none;
       border-radius: 6px;
+      font-family: 'Courier New', monospace;
     }
     select {
-      background-color: #0b0c10;
-      color: #ffffff;
+      background-color: #3b2f2f;
+      color: #fff8dc;
     }
     button {
-      background-color: #45a29e;
-      color: #ffffff;
+      background-color: #a76d60;
+      color: #fff8dc;
       cursor: pointer;
       transition: background 0.3s ease;
     }
     button:hover {
-      background-color: #66fcf1;
-      color: #0b0c10;
+      background-color: #d4a373;
+      color: #1b1a1f;
     }
     audio {
       width: 100%;
@@ -51,22 +73,24 @@
     }
     img.thumbnail {
       width: 100%;
-      max-height: 400px;
+      max-height: 450px;
       object-fit: cover;
       border-radius: 10px;
       margin-bottom: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border: 4px solid #a76d60;
+      display: none;
     }
     .track-title, .fun-fact, .news, .influential-section {
       margin: 15px 0;
+      display: none;
     }
     .influential-img {
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
       object-fit: cover;
       border-radius: 50%;
       margin-bottom: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      border: 3px solid #d4a373;
     }
     #welcomeScreen {
       position: fixed;
@@ -74,10 +98,9 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
-      color: #ffffff;
+      background: linear-gradient(to bottom right, #4b3b47, #1b1a1f);
+      color: #ffe9c7;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 9999;
@@ -88,20 +111,28 @@
       opacity: 0;
       pointer-events: none;
     }
+    .welcome-box {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      text-align: center;
+    }
     #enterBtn {
       margin-top: 20px;
-      padding: 12px 24px;
-      font-size: 1.2rem;
-      background: #66fcf1;
-      color: #0b0c10;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #d4a373;
+      color: #1b1a1f;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s ease;
+      font-family: 'Courier New', monospace;
     }
     #enterBtn:hover {
-      background: #45a29e;
-      color: #ffffff;
+      background: #a76d60;
+      color: #fff8dc;
     }
     @keyframes slideInFade {
       from { opacity: 0; transform: translateY(-20px); }
@@ -116,18 +147,77 @@
     #welcomeScreen p {
       animation-delay: 0.6s;
     }
+    .custom-audio {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-container {
+  width: 100%;
+  height: 12px;
+  background-color: #433232;
+  border-radius: 6px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 0 4px #b08968;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #ddb892;
+  transition: width 0.2s;
+}
+#triviaTicker {
+  background-color: #1e1b26;
+  color: #ffd670;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  padding: 10px;
+  border-top: 2px solid #b08968;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+  margin-top: 0;
+}
+<<<<<<< HEAD
+.fade-slide {
+  animation: fadeSlideIn 0.6s ease;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+=======
+>>>>>>> fc227ec46a035bd0cdb7ec08b75e359589b57bb9
+
   </style>
 </head>
 <body>
   <div id="welcomeScreen">
-    <h1>🎙️ Welcome to FeelRewind Radio</h1>
-    <p>Relive your favorite decades through music, moments & memories</p>
-    <button id="enterBtn" onclick="enterApp()">Enter</button>
+    <div class="welcome-box">
+      <h1>📼 Welcome to FeelRewind Radio</h1>
+      <p>Relive your favorite decades through music, moments & memories</p>
+      <span><button id="enterBtn" onclick="enterApp()">Enter</button></span>
+    </div>
   </div>
 
   <header>
     <h1>📻 FeelRewind Radio</h1>
     <p>Select a decade to dive into nostalgia!</p>
+    
   </header>
   <div class="container">
     <select id="decade" onchange="changeTheme()">
@@ -143,12 +233,34 @@
 
     <img id="thumbnail" class="thumbnail" src="" alt="Song Thumbnail">
     <div id="trackTitle" class="track-title"></div>
-    <audio controls id="radioPlayer"></audio>
+<<<<<<< HEAD
+    <div id="trackCounter" style="text-align:center; font-size: 0.95rem; margin-bottom: 10px; color: #ddb892;"></div>
+
+=======
+>>>>>>> fc227ec46a035bd0cdb7ec08b75e359589b57bb9
+    <audio id="radioPlayer"></audio>
+
+<!-- Custom Controls -->
+<div class="custom-audio">
+  <div class="progress-container" onclick="seek(event)">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <button onclick="togglePlay()" id="playBtn">⏯️ Play</button>
+</div>
+
+<<<<<<< HEAD
+<div style="display: flex; justify-content: space-between; gap: 10px;">
+  <button onclick="prevSong()">⏮️ Previous Song</button>
+  <button onclick="nextSong()">Next Song ⏭️</button>
+</div>
+
+=======
     <button onclick="nextSong()">Next Song ⏭️</button>
+>>>>>>> fc227ec46a035bd0cdb7ec08b75e359589b57bb9
 
     <div class="fun-fact" id="funFact"></div>
     <div class="news" id="news"></div>
-    <div class="influential-section">
+    <div class="influential-section" id="influentialSection">
       <img id="influentialImg" class="influential-img" src="" alt="Influential Figure">
       <div id="influentialName" style="font-weight: bold;"></div>
       <div id="influentialDesc"></div>
@@ -185,35 +297,108 @@
         document.getElementById('influentialName').innerText = data.influential.name;
         document.getElementById('influentialDesc').innerText = data.influential.description;
         document.getElementById('influentialImg').src = data.influential.image;
+
+        document.getElementById('thumbnail').style.display = 'block';
+        document.getElementById('trackTitle').style.display = 'block';
+        document.getElementById('funFact').style.display = 'block';
+        document.getElementById('news').style.display = 'block';
+        document.getElementById('influentialSection').style.display = 'block';
       } catch (err) {
         console.error(err);
         alert("Failed to load content. Try again later.");
       }
     }
 
-    function playTrack(index) {
-      if (index >= playlist.length) return;
-      const audio = document.getElementById("radioPlayer");
-      const titleBox = document.getElementById("trackTitle");
-      const thumbnail = document.getElementById("thumbnail");
+ function playTrack(index) {
+  if (index >= playlist.length || index < 0) return;
 
-      const track = playlist[index];
-      audio.src = `audio/${track.file}`;
-      titleBox.innerText = track.title || "Untitled";
-      thumbnail.src = track.thumbnail || "thumbnails/default.jpg";
-      audio.play();
+  const audio = document.getElementById("radioPlayer");
+  const titleBox = document.getElementById("trackTitle");
+  const thumbnail = document.getElementById("thumbnail");
 
-      audio.onended = () => {
-        currentIndex++;
-        playTrack(currentIndex);
-      };
-    }
+  const track = playlist[index];
+  audio.src = `audio/${track.file}`;
+  audio.play();
+
+  // Update thumbnail and title with fade-slide animation
+  thumbnail.src = track.thumbnail || "thumbnails/default.jpg";
+  titleBox.innerText = track.title || "Untitled";
+  document.getElementById("trackCounter").innerText = `🎼 Now Playing: Track ${index + 1} of ${playlist.length}`;
+document.getElementById("trackCounter").style.display = 'block';
+
+
+  // Trigger animation
+  thumbnail.classList.remove("fade-slide");
+  titleBox.classList.remove("fade-slide");
+
+  void thumbnail.offsetWidth; // reflow trick
+  void titleBox.offsetWidth;
+
+  thumbnail.classList.add("fade-slide");
+  titleBox.classList.add("fade-slide");
+
+  // Handle autoplay next
+  audio.onended = () => {
+    currentIndex++;
+    playTrack(currentIndex);
+  };
+
+  // Optional: Disable prev/next buttons if at edges
+  document.querySelector('button[onclick="prevSong()"]').disabled = index === 0;
+  document.querySelector('button[onclick="nextSong()"]').disabled = index >= playlist.length - 1;
+}
+
 
     function nextSong() {
       if (currentIndex + 1 < playlist.length) {
         playTrack(++currentIndex);
       }
     }
+<<<<<<< HEAD
+    function prevSong() {
+  if (currentIndex > 0) {
+    playTrack(--currentIndex);
+  }
+}
+
+=======
+>>>>>>> fc227ec46a035bd0cdb7ec08b75e359589b57bb9
+    const audio = document.getElementById("radioPlayer");
+const progressBar = document.getElementById("progressBar");
+const playBtn = document.getElementById("playBtn");
+
+function togglePlay() {
+  if (audio.paused) {
+    audio.play();
+    playBtn.innerText = "⏸️ Pause";
+  } else {
+    audio.pause();
+    playBtn.innerText = "▶️ Play";
+  }
+}
+
+audio.addEventListener('timeupdate', () => {
+  const percent = (audio.currentTime / audio.duration) * 100;
+  progressBar.style.width = percent + '%';
+});
+
+function seek(e) {
+  const container = e.currentTarget;
+  const rect = container.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const percent = clickX / container.offsetWidth;
+  audio.currentTime = percent * audio.duration;
+}
+
   </script>
+  <div id="triviaTicker">
+  <marquee behavior="scroll" direction="left" scrollamount="4" id="triviaText">
+    🎵 Did you know? In 1982, India got its first color TV broadcast during the Asian Games! | 
+    🎧 Lata Mangeshkar recorded over 25,000 songs in her lifetime! | 
+    📼 The 90s saw the rise of cassette mixtapes shared between friends as love letters. |
+    🎤 In the 2000s, Sonu Nigam became a household voice across 15 languages!
+  </marquee>
+</div>
+
 </body>
 </html>

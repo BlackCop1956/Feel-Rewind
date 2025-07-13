@@ -16,27 +16,39 @@ using json = nlohmann::json;
 std::map<std::string, std::vector<json>> decadeToTracks = {
     {"1960s", {
         { {"file", "1960s1.mp3"}, {"title", "Aajkal Tere Mere Pyar Ke Charche"}, {"thumbnail", "thumbnails/1960s1.jpg"} },
-        { {"file", "1960s2.mp3"}, {"title", "Mere Samnewali Khidki Mein"}, {"thumbnail", "thumbnails/1960s2.jpg"} }
+        { {"file", "1960s2.mp3"}, {"title", "Mere Samnewali Khidki Mein"}, {"thumbnail", "thumbnails/1960s2.jpg"} },
+        { {"file", "1960s3.mp3"}, {"title", "Likhe Jo Khat Tujhe"}, {"thumbnail", "thumbnails/1960s3.jpg"} },
+        { {"file", "1960s4.mp3"}, {"title", "Isharon Isharon Mein Dil Lenewale"}, {"thumbnail", "thumbnails/1960s4.jpg"} }
     }},
     {"1970s", {
         { {"file", "1970s1.mp3"}, {"title", "O Mere Dil Ke Chain"}, {"thumbnail", "thumbnails/1970s1.jpg"} },
-        { {"file", "1970s2.mp3"}, {"title", "Bahon Mein Chale Aao"}, {"thumbnail", "thumbnails/1970s2.jpg"} }
+        { {"file", "1970s2.mp3"}, {"title", "Bahon Mein Chale Aao"}, {"thumbnail", "thumbnails/1970s2.jpg"} },
+        { {"file", "1970s3.mp3"}, {"title", "Tum Aa Gaye Ho Noor Aa Gaya Hai"}, {"thumbnail", "thumbnails/1970s3.jpg"} },
+        { {"file", "1970s4.mp3"}, {"title", "Kehdoon Tumhen"}, {"thumbnail", "thumbnails/1970s4.jpg"} }
     }},
     {"1980s", {
         { {"file", "1980s1.mp3"}, {"title", "Mere Rang Mein Rangne"}, {"thumbnail", "thumbnails/1980s1.jpg"} },
-        { {"file", "1980s2.mp3"}, {"title", "Neele Neele Ambar Par"}, {"thumbnail", "thumbnails/1980s2.jpg"} }
+        { {"file", "1980s2.mp3"}, {"title", "Neele Neele Ambar Par"}, {"thumbnail", "thumbnails/1980s2.jpg"} },
+        { {"file", "1980s3.mp3"}, {"title", "Hame Tumse Pyaar Kitna"}, {"thumbnail", "thumbnails/1980s3.jpg"} },
+        { {"file", "1980s4.mp3"}, {"title", "Ye Kaha Aa Gaye Hum"}, {"thumbnail", "thumbnails/1980s4.jpg"} }
     }},
     {"1990s", {
         { {"file", "1990s1.mp3"}, {"title", "Tujhe Dekha To"}, {"thumbnail", "thumbnails/1990s1.jpg"} },
-        { {"file", "1990s2.mp3"}, {"title", "Tip Tip Barsa Paani"}, {"thumbnail", "thumbnails/1990s2.jpg"} }
+        { {"file", "1990s2.mp3"}, {"title", "Tip Tip Barsa Paani"}, {"thumbnail", "thumbnails/1990s2.jpg"} },
+        { {"file", "1990s3.mp3"}, {"title", "Aaye Ho Meri Zindagi Mein"}, {"thumbnail", "thumbnails/1990s3.jpg"} },
+        { {"file", "1990s4.mp3"}, {"title", "Raah Mein Unse Mulaqat"}, {"thumbnail", "thumbnails/1990s4.jpg"} }
     }},
     {"2000s", {
         { {"file", "2000s1.mp3"}, {"title", "Kal Ho Naa Ho"}, {"thumbnail", "thumbnails/2000s1.jpg"} },
-        { {"file", "2000s2.mp3"}, {"title", "Tum Se Hi"}, {"thumbnail", "thumbnails/2000s2.jpg"} }
+        { {"file", "2000s2.mp3"}, {"title", "Tum Se Hi"}, {"thumbnail", "thumbnails/2000s2.jpg"} },
+        { {"file", "2000s3.mp3"}, {"title", "Kaise Mujhe"}, {"thumbnail", "thumbnails/2000s3.jpg"} },
+        { {"file", "2000s4.mp3"}, {"title", "Khuda Jaane"}, {"thumbnail", "thumbnails/2000s4.jpg"} }
     }},
     {"2010s", {
         { {"file", "2010s1.mp3"}, {"title", "Tum Hi Ho"}, {"thumbnail", "thumbnails/2010s1.jpg"} },
-        { {"file", "2010s2.mp3"}, {"title", "Balam Pichkari"}, {"thumbnail", "thumbnails/2010s2.jpg"} }
+        { {"file", "2010s2.mp3"}, {"title", "Badtameez Dil"}, {"thumbnail", "thumbnails/2010s2.jpg"} },
+        { {"file", "2010s3.mp3"}, {"title", "Khaabon Ke Parinday"}, {"thumbnail", "thumbnails/2010s3.jpg"} },
+        { {"file", "2010s4.mp3"}, {"title", "Ae Dil Hai Mushkil"}, {"thumbnail", "thumbnails/2010s4.jpg"} }
     }}
 };
 
