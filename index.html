@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+<<<<<<< Updated upstream
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bollywood Decade Explorer</title>
   <link rel="stylesheet" href="styles.css">
@@ -85,6 +86,140 @@
 
     setInterval(showRandomFact, 5000);
     showRandomFact(); // initial fact
+=======
+  <title>MindTime Radio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background: linear-gradient(to bottom, #1e1e1e, #3e3e3e);
+      color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #292929;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
+    .radio-box {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #444;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+    select,
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+    button {
+      background: #00b894;
+      color: white;
+      cursor: pointer;
+    }
+    audio {
+      width: 100%;
+      margin-top: 20px;
+    }
+    .footer {
+      text-align: center;
+      margin: 40px 0 10px;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📻 FeelRewind Radio</h1>
+    <p>AI-Powered Nostalgia by Decade</p>
+  </header>
+
+  <div class="radio-box">
+    <label for="decade">🕰️ Choose a Decade</label>
+    <select id="decade">
+      <option value="1960s">1960s</option>
+      <option value="1970s">1970s</option>
+      <option value="1980s">1980s</option>
+      <option value="1990s">1990s</option>
+      <option value="2000s">2000s</option>
+      <option value="2010s">2010s</option>
+    </select>
+
+    <button onclick="generateRadioHour()">Play Radio 🎧</button>
+
+    <audio controls id="radioPlayer"></audio>
+    <button onclick="nextSong()">Next Song ⏭️</button>
+
+
+  </div>
+
+  <div class="footer">
+    &copy; 2025 MindTime Radio. Rewind your era.
+  </div>
+
+  <script>
+    let playlist = [];
+let currentIndex = 0;
+
+async function generateRadioHour() {
+  const decade = document.getElementById('decade').value;
+
+  try {
+    const res = await fetch("http://localhost:8080/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ decade })
+    });
+
+    if (!res.ok) throw new Error("Server error");
+    const data = await res.json();
+    console.log("🎧 Playlist received:", data);
+
+    playlist = data.playlist;
+    currentIndex = 0;
+    playTrack(currentIndex);
+  } catch (err) {
+    alert("Error playing radio. Try again later.");
+    console.error(err);
+  }
+}
+
+function playTrack(index) {
+  if (index >= playlist.length) {
+    console.log("✅ Playlist ended.");
+    return;
+  }
+  const audio = document.getElementById("radioPlayer");
+  audio.src = `audio/${playlist[index]}`;
+  audio.play();
+
+  // Auto-play next track on end
+  audio.onended = () => {
+    currentIndex++;
+    playTrack(currentIndex);
+  };
+}
+function nextSong() {
+  if (currentIndex + 1 < playlist.length) {
+    playTrack(++currentIndex);
+  }
+}
+
+
+>>>>>>> Stashed changes
   </script>
 </body>
 </html>
+
